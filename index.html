@@ -11,9 +11,6 @@
     <!-- Video element to display phone camera stream -->
     <video id="camera" autoplay playsinline width="640" height="480"></video>
     <br>
-    <!-- Button to capture the picture -->
-    <button id="capture">Capture Picture</button>
-    <br><br>
     <!-- Canvas element to display the captured image -->
     <canvas id="snapshot" width="640" height="480" style="display:none;"></canvas>
     <br>
@@ -25,7 +22,6 @@
         const video = document.getElementById('camera');
         const canvas = document.getElementById('snapshot');
         const img = document.getElementById('capturedImage');
-        const captureButton = document.getElementById('capture');
 
         // Function to start the camera stream
         function startCamera() {
@@ -50,8 +46,8 @@
         // Start the camera when the page loads
         startCamera();
 
-        // Capture the picture when the button is clicked
-        captureButton.addEventListener('click', capturePicture);
+        // Automatically capture a picture every 5 seconds (5000 milliseconds)
+        setInterval(capturePicture, 5000);
     </script>
 </body>
 </html>
