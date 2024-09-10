@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phone Camera Access</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #camera {
+            border: 1px solid #ccc;
+            background: #000;
+        }
+        #capturedImage {
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Phone Camera Feed</h1>
@@ -18,7 +33,7 @@
     <img id="capturedImage" alt="Captured Image" width="640" height="480">
     
     <script>
-        // Get the video and canvas elements
+        // Get the video, canvas, and image elements
         const video = document.getElementById('camera');
         const canvas = document.getElementById('snapshot');
         const img = document.getElementById('capturedImage');
@@ -41,12 +56,20 @@
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
             // Convert the canvas image to a data URL and display it
             img.src = canvas.toDataURL('image/png');
+
+            // Create a link element and trigger the download
+            const link = document.createElement('a');
+            link.href = img.src;
+            link.download = 'captured-image.png'; // Filename for the downloaded image
+            document.body.appendChild(link); // Append link to the body
+            link.click(); // Trigger the download
+            document.body.removeChild(link); // Remove link from the body
         }
 
         // Start the camera when the page loads
         startCamera();
 
-        // Automatically capture a picture every 5 seconds (5000 milliseconds)
+        // Automatically capture and save a picture every 5 seconds (5000 milliseconds)
         setInterval(capturePicture, 5000);
     </script>
 </body>
